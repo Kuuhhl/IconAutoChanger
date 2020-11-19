@@ -1,6 +1,11 @@
 # IconAutoChanger
 Automatically launches League of Legends and changes icon.
 ## Installation
+* Install dependencies (only in Python-version)
+```
+Python 3.8
+lcu-driver
+```
 * Open `main.py` or `IconAutoChanger.exe`
 * Input path to League of Legends Client executable if asked
 * Put the file on your Desktop / an easily accessible folder
