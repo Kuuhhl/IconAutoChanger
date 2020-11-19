@@ -1,7 +1,24 @@
 from lcu_driver import Connector
 import os
+from tkinter import *
+from tkinter import filedialog
+
 
 connector = Connector()
+
+
+def get_league_path():
+    master = Tk()
+    master.withdraw()
+    leaguedir = filedialog.askopenfilename(
+        parent=master,
+        initialdir=os.getcwd(),
+        title="Please select your League of Legends Client executable",
+        filetypes=[("Executable files", "*.exe")],
+    )
+    master.destroy()
+    return leaguedir
+    master.mainloop()
 
 
 async def set_icon(connection):
@@ -22,7 +39,6 @@ async def set_icon(connection):
 # fired when LCU API is ready to be used
 @connector.ready
 async def connect(connection):
-    print("LCU API is ready to be used.")
 
     # check if the user is already logged into his account
     summoner = await connection.request("get", "/lol-summoner/v1/current-summoner")
@@ -40,15 +56,13 @@ def main():
 
 
 try:
-    configlocation = os.environ.get("appdata") + "\\IDAutoChanger\\config.txt"
-    newpath = os.environ.get("appdata") + "\\IDAutoChanger"
+    newpath = os.path.join(os.environ.get("appdata"), "IDAutoChanger")
+    configlocation = os.path.join(newpath, "config.txt")
     if not os.path.exists(newpath):
         os.makedirs(newpath)
     open(configlocation, "x")
     with open(configlocation, "a") as f:
-        f.write(
-            input("Path to League installation: ") + "\n" + str(int(input("Icon ID: ")))
-        )
+        f.write(get_league_path() + "\n" + "501")
     raise Exception
 except (FileExistsError, Exception):
     while True:
