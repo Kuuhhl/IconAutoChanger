@@ -1,7 +1,5 @@
 # IconAutoChanger
 Automatically launches League of Legends and changes icon.
-## Demonstration
-[![Demonstration](https://img.youtube.com/vi/IIzLh5IpGf8/0.jpg)](https://www.youtube.com/watch?v=IIzLh5IpGf8)
 ## Downloads
 Binary version for windows can be found [here](https://github.com/Kuuhhl/IconAutoChanger/releases/)
 ## Installation
