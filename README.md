@@ -3,10 +3,12 @@ Automatically sends requests to League of Legends on startup. This can be used f
 ## Downloads
 Binary version for windows can be found [here](https://github.com/Kuuhhl/IconAutoChanger/releases/)
 ## Installation (binary; recommended)
-* Open `setup.exe`
+* Open `installer.exe`
 * Follow installation steps
-* After installation, open `ChangeSettings.exe` and configure your requests using the GUI.
+* After installation, configure your requests using the GUI.
 * Restart your PC
+### Where is the Program installed?
+It is located in `C:\Users\USERNAME\AppData\Local\Programs\IconAutoChanger`.
 ### I get a SmartScreen warning (unknown author). What should I do?
 Since my executable isn't digitally signed, you will probably get this warning. If you want to remove it, just add an Exception to your Windows Defender antivirus.
 
@@ -17,6 +19,7 @@ Python 3.8
 lcu-driver
 ```
 * Clone/Download repository
+* Put the `config.json` in `%appdata$/IconAutoChanger`
 * Open `main.py`
 * Configure your requests using the GUI.
 * Put a shortcut to `main.py` into your AutoStart folder (Press `Windows` + `R`, run `shell:startup`.)
