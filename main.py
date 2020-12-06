@@ -4,16 +4,19 @@ import time
 import json
 
 connector = Connector()
+CONFIG_PATH = os.path.join(
+    os.path.join(os.environ.get("appdata"), "IconAutoChanger"), "config.json"
+)
 
 
 def parse_config():
     return [
-        request for request in json.loads(open("config.json", "r").read())["requests"]
+        request for request in json.loads(open(CONFIG_PATH, "r").read())["requests"]
     ]
 
 
 def check_config():
-    if os.path.isfile("config.json"):
+    if os.path.isfile(CONFIG_PATH):
         return True
 
 
@@ -43,11 +46,11 @@ async def connect(connection, event):
 
 
 def main():
-    if check_config():
+    config = parse_config()
+    if config != []:
         connector.start()
-    else:
+    elif config == []:
         os.system("python settings.py")
-        exit("No configuration file detected. Opening Settings...")
 
 
 main()

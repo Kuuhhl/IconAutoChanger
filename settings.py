@@ -4,40 +4,15 @@ import json
 from tkinter import ttk
 import os
 
+CONFIG_PATH = os.path.join(
+    os.path.join(os.environ.get("appdata"), "IconAutoChanger"), "config.json"
+)
 
-def get_requests():
+
+def get_requests():  # returns list of requests in config
     return [
-        request for request in json.loads(open("config.json", "r").read())["requests"]
+        request for request in json.loads(open(CONFIG_PATH, "r").read())["requests"]
     ]
-
-
-def ask_league_path():
-    from tkinter import filedialog
-
-    master = Tk()
-    master.withdraw()
-    master.iconbitmap("settingsicon.ico")
-    while True:
-        leaguedir = filedialog.askopenfilename(
-            parent=master,
-            initialdir=os.environ.get("PROGRAMFILES"),
-            title="Please select your League of Legends Client executable",
-            filetypes=[("Executable files", "*.exe")],
-        )
-        if leaguedir == "":
-            showwarning(title="Error", message="Please input a valid path!")
-        else:
-            break
-    master.destroy()
-    config = {"requests": get_requests(), "LeaguePath": leaguedir}
-
-    with open("config.json", "w") as f:
-        f.write(json.dumps(config, indent=4))
-    try:
-        pathLabel.config(text=f"Current League Client path: \n{leaguedir}")
-    except:
-        pass
-    master.mainloop()
 
 
 def rearrange(config, title, direction):  # True = up; #False = down
@@ -54,30 +29,27 @@ def rearrange(config, title, direction):  # True = up; #False = down
     listbox_update()
 
 
-def listbox_update():
+def listbox_update():  # update listbox
     listboxRequests.delete(0, END)
     for request in get_requests():
         listboxRequests.insert("end", request["title"])
 
 
-def update_config(config):
-    config = {
-        "requests": config,
-        "LeaguePath": json.loads(open("config.json", "r").read())["LeaguePath"],
-    }
+def update_config(config):  # Make changes to config
+    config = {"requests": config}
 
-    with open("config.json", "w") as f:
+    with open(CONFIG_PATH, "w") as f:
         f.write(json.dumps(config, indent=4))
     return
 
 
-def search_value(key, value):
+def search_value(key, value):  # search for request value in config
     for request in get_requests():
         if request[key] == value:
             return request
 
 
-def ClickNew(config):
+def ClickNew(config):  # append new item with default values
     suffix = 0
     while True:
         try:
@@ -103,7 +75,7 @@ def ClickNew(config):
     showinfo(title="Success", message="Added request successfully.")
 
 
-def ClickDelete(config, title):
+def ClickDelete(config, title):  # remove selected item
     for request in config:
         if request["title"] == title:
             config.remove(request)
@@ -112,7 +84,7 @@ def ClickDelete(config, title):
     listbox_update()
 
 
-def ClickApply(beforetitle, title, endpoint, method, body):
+def ClickApply(beforetitle, title, endpoint, method, body):  # apply changes to item
     config = get_requests()
     for request in config:
         if request["title"] == title and title != beforetitle:
@@ -133,7 +105,7 @@ def ClickApply(beforetitle, title, endpoint, method, body):
     showinfo(title="Success", message="Applied changes successfully.")
 
 
-def Edit(event):
+def Edit(event):  # Show Edit Frame
     selectedTitle = listboxRequests.get(event.widget.curselection()[0])
     editFrame = Frame(tkFenster)
     editFrame.grid(row=0, column=2)
@@ -167,7 +139,7 @@ def Edit(event):
 
     # Entry Body
     Label(master=editFrame, text="Body:").grid(row=3, column=0)
-    bodyEntry = Text(editFrame, height=20, width=100)
+    bodyEntry = Text(editFrame, height=20, width=130)
     bodyEntry.insert(
         END,
         json.dumps(
@@ -190,35 +162,20 @@ def Edit(event):
     editFrame.mainloop()
 
 
-if not os.path.isfile("config.json"):
-    with open("config.json", "w") as f:
-        f.write('{"requests": []}')
-
-try:
-    if json.loads(open("config.json", "r").read())["LeaguePath"] == "":
-        ask_league_path()
-except KeyError:
-    ask_league_path()
-# Erzeugung des Fensters
+# Creation of root window
 tkFenster = Tk()
+tkFenster.geometry("1300x500")
 tkFenster.iconbitmap("settingsicon.ico")
 tkFenster.lift()
 tkFenster.title("Settings Changer")
-# Kontrollvariable
-text = StringVar()
-# Listbox
+
+
+# Listbox of Requests
 listboxRequests = Listbox(master=tkFenster, selectmode="browse", exportselection=False)
 for request in get_requests():
     listboxRequests.insert("end", request["title"])
 listboxRequests.grid(row=0, column=0)
 listboxRequests.bind("<<ListboxSelect>>", Edit)
-
-# Button verarbeiten
-leaguedir = json.loads(open("config.json", "r").read())["LeaguePath"]
-pathLabel = Label(text=f"Current League Client path: \n{leaguedir}")
-pathLabel.grid(row=1, column=0)
-pathButton = Button(master=tkFenster, text="Update Path", command=ask_league_path)
-pathButton.grid(row=2, column=0)
 # Buttons
 buttonFrame = Frame(master=tkFenster)
 buttonFrame.grid(row=0, column=1)
@@ -251,5 +208,5 @@ downButton = Button(
 )
 
 downButton.grid(row=3, column=0)
-
+# mainloop
 tkFenster.mainloop()
