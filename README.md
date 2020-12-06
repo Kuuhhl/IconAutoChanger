@@ -19,7 +19,7 @@ Python 3.8
 lcu-driver
 ```
 * Clone/Download repository
-* Put the `config.json` in `%appdata$/IconAutoChanger`
+* Put the `config.json` in `%appdata%/IconAutoChanger`
 * Open `main.py`
 * Configure your requests using the GUI.
 * Put a shortcut to `main.py` into your AutoStart folder (Press `Windows` + `R`, run `shell:startup`.)
@@ -36,8 +36,8 @@ You can change things in the League of Legends Client. These include:
 * Sending friend requests
 * Setting your rank shown in chat
 * ...
-### Examples
-#### Set custom icon:
+## Examples
+### Set custom icon:
 
 API-Endpoint: `/lol-chat/v1/me`
 
@@ -49,7 +49,7 @@ Body:
 "icon": 4832
 }
 ```
-#### Set chat rank:
+### Set chat rank:
 
 API-Endpoint: `/lol-chat/v1/me`
 
@@ -65,7 +65,7 @@ Body:
    }
 }
 ```
-#### Set club-tag:
+### Set club-tag:
 
 API-Endpoint: `/lol-chat/v1/me`
 
@@ -79,6 +79,31 @@ Body:
    }
 }
 ```
-#### More
+### Create Game Lobby (Normal Draft):
+
+API-Endpoint: `/lol-lobby/v2/lobby`
+
+Method: `POST`
+
+Body:
+```
+{
+    "queueId": 400
+}
+```
+### Select Position
+
+API-Endpoint: `/lol-lobby/v1/lobby/members/localMember/position-preferences`
+
+Method: `PUT`
+
+Body:
+```
+{
+    "firstPreference": "MIDDLE",
+    "secondPreference": "TOP"
+}
+```
+### More
 * You can browse endpoints of the LCU API with this website: https://lcu.vivide.re/
 * If you need help with finding some endpoints, this server might be able to help you: https://discord.gg/bFQKCKzRuh 
