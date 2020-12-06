@@ -1,5 +1,7 @@
 # IconAutoChanger
 Automatically sends requests to League of Legends on startup. This can be used for custom icons, custom clubdata, chat rank, etc. 
+## Demonstration (video):
+[![Click here](https://img.youtube.com/vi/SfGTPPH-6Ek/0.jpg)](https://www.youtube.com/watch?v=SfGTPPH-6Ek)
 ## Downloads
 Binary version for windows can be found [here](https://github.com/Kuuhhl/IconAutoChanger/releases/)
 ## Installation (binary; recommended)
