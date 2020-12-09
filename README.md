@@ -67,20 +67,7 @@ Body:
    }
 }
 ```
-### Set club-tag:
 
-API-Endpoint: `/lol-chat/v1/me`
-
-Method: `PUT`
-
-Body:
-```
-{
-   "lol":{
-      "clubsData":"bDI6aKW7DPD+sF8NuV+i6G3PDPhjyBKokFr+ezNA7141Jkl35XXwH43SFSC2q5D0mE5Yl4RibZzfaPGeWhcthdYm5fP+xB23+xsVQzHL5W9TjnVaDD40aZiCUEn3+GY5rP1xoI8Xw4e04XZZFKH+n2VCzuhXpUI3IgYC9TQJmWo="
-   }
-}
-```
 ### Create Game Lobby (Normal Draft):
 
 API-Endpoint: `/lol-lobby/v2/lobby`
