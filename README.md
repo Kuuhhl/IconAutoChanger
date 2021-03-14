@@ -1,3 +1,5 @@
+# Disclaimer
+This tool will no longer be maintained. Please refer to alternative solutions, such as the [LCU Enhancement Suite](https://github.com/xadamxk/LCU-Enhancement-Suite) by xadanxk.
 # IconAutoChanger
 Automatically sends requests to League of Legends on startup. This can be used for custom icons, custom clubdata, chat rank, etc. 
 ## Demonstration (video):
